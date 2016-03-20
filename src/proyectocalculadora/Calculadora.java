@@ -12,21 +12,24 @@ package proyectocalculadora;
 public class Calculadora extends javax.swing.JFrame {
 
     String memoria1;
-    String signo;
+    String signo = "";
     String memoria2;
     String memoria3;
     Double contador = 0.0;
-    Double operacion = 0.0;
+    String operacion;
     Boolean igualPrecionado = false;
     Boolean activo = false;
     Boolean restaAct = false;
+    Boolean sumaAct = false;
     String cuenta = "";
+    String resultado = "";
 
     /**
      * Creates new form Calculadora
      */
     public Calculadora() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -330,9 +333,14 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void bnt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt1ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+//        if (igualPrecionado == true) {
+//            txtPantalla.setText("");
+//            igualPrecionado = false;
+//        }
+        
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "1");
 
@@ -340,81 +348,81 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "2");
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "3");
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void bnt4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt4ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "4");
     }//GEN-LAST:event_bnt4ActionPerformed
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "5");
     }//GEN-LAST:event_btn5ActionPerformed
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "6");
     }//GEN-LAST:event_btn6ActionPerformed
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "7");
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "8");
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "9");
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
         // TODO add your handling code here:
-        if (igualPrecionado == true) {
+        if (!resultado.equals("")) {
             txtPantalla.setText("");
-            igualPrecionado = false;
+            resultado = "";
         }
         txtPantalla.setText(txtPantalla.getText() + "0");
     }//GEN-LAST:event_btn0ActionPerformed
@@ -455,6 +463,8 @@ public class Calculadora extends javax.swing.JFrame {
         contador = 0.0;
         memoria1 = "";
         memoria2 = "";
+        signo = "";
+        resultado = "";
     }//GEN-LAST:event_btnBorrarPantallaActionPerformed
 
     private void btnInvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvertirActionPerformed
@@ -494,7 +504,20 @@ public class Calculadora extends javax.swing.JFrame {
 
         String resta;
 
-        if (restaAct == false) {
+        if (!signo.equals("") && igualPrecionado == false) {
+            
+              memoria2 = txtPantalla.getText();
+            resta = calculadora(memoria1, memoria2, signo);
+            memoria1 = resta;
+            signo = "-";
+            cuenta = cuenta + " " + txtPantalla.getText() +" "+ signo;
+            txtOperacion.setText(cuenta);
+            txtPantalla.setText("");
+            igualPrecionado = false;
+            
+        }else{
+            
+            igualPrecionado = false;
             if (!txtPantalla.getText().equals("")) {
                 contador = Double.parseDouble(txtPantalla.getText());
                 memoria1 = txtPantalla.getText();
@@ -506,47 +529,151 @@ public class Calculadora extends javax.swing.JFrame {
             }else{
                 memoria1="0";
             }
-
-        } else {
-
-            memoria2 = txtPantalla.getText();
-            resta = calculadora(memoria1, memoria2, signo);
-            memoria1 = resta;
-            signo = "-";
-            cuenta = cuenta + " " + txtPantalla.getText() + signo;
-            txtOperacion.setText(cuenta);
-            txtPantalla.setText("");
+            
         }
+        
+        
+        
+//        if (restaAct == false) {
+//            if (!txtPantalla.getText().equals("")) {
+//                contador = Double.parseDouble(txtPantalla.getText());
+//                memoria1 = txtPantalla.getText();
+//                signo = "-";
+//                cuenta = " " + cuenta + " " + txtPantalla.getText() + " " + signo;
+//                txtOperacion.setText(cuenta);
+//                txtPantalla.setText("");
+//                restaAct = true;
+//            }else{
+//                memoria1="0";
+//            }
+//
+//        } else {
+//
+//            memoria2 = txtPantalla.getText();
+//            resta = calculadora(memoria1, memoria2, signo);
+//            memoria1 = resta;
+//            signo = "-";
+//            cuenta = cuenta + " " + txtPantalla.getText() + signo;
+//            txtOperacion.setText(cuenta);
+//            txtPantalla.setText("");
+//        }
 
 
     }//GEN-LAST:event_btnMenosActionPerformed
 
     private void btnMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasActionPerformed
         // TODO add your handling code here:
+//Version 1 funcional suma
+//        if (!txtPantalla.getText().equals("")) {
+//            contador = contador + Double.parseDouble(txtPantalla.getText());
+//            memoria1 = contador.toString();
+//            signo = "+";
+//            txtPantalla.setText("");
+//        } else {
+//            memoria1 = "0";
+//        }
 
-        if (!txtPantalla.getText().equals("")) {
-            contador = contador + Double.parseDouble(txtPantalla.getText());
-            memoria1 = contador.toString();
+        
+        if (!signo.equals("") && igualPrecionado == false) {
+            
+              memoria2 = txtPantalla.getText();
+            operacion = calculadora(memoria1, memoria2, signo);
+            memoria1 = operacion;
             signo = "+";
+            cuenta = cuenta + " " + txtPantalla.getText() +" "+ signo;
+            txtOperacion.setText(cuenta);
             txtPantalla.setText("");
-        } else {
-            memoria1 = "0";
+            igualPrecionado = false;
+            
+        }else{
+            
+            igualPrecionado = false;
+            if (!txtPantalla.getText().equals("")) {
+                contador = Double.parseDouble(txtPantalla.getText());
+                memoria1 = txtPantalla.getText();
+                signo = "+";
+                cuenta = " " + cuenta + " " + txtPantalla.getText() + " " + signo;
+                txtOperacion.setText(cuenta);
+                txtPantalla.setText("");
+                restaAct = true;
+            }else{
+                memoria1="0";
+            }
+            
         }
-
+        
+        
+//        String suma;
+//        
+//        if (sumaAct == false) {
+//            if (!txtPantalla.getText().equals("")) {
+//                contador = Double.parseDouble(txtPantalla.getText());
+//                memoria1 = txtPantalla.getText();
+//                signo = "+";
+//                cuenta = " " + cuenta + " " + txtPantalla.getText() + " " + signo;
+//                txtOperacion.setText(cuenta);
+//                txtPantalla.setText("");
+//                sumaAct = true;
+//            }else{
+//                memoria1="0";
+//            }
+//
+//        } else {
+//
+//            memoria2 = txtPantalla.getText();
+//            suma = calculadora(memoria1, memoria2, signo);
+//            memoria1 = suma;
+//            signo = "+";
+//            cuenta = cuenta + " " + txtPantalla.getText() + signo;
+//            txtOperacion.setText(cuenta);
+//            txtPantalla.setText("");
+//        }
+        
+        
 
     }//GEN-LAST:event_btnMasActionPerformed
 
     private void btnPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPorActionPerformed
         // TODO add your handling code here:
-        if (!txtPantalla.getText().equals("")) {
-            contador = 1.0;
-            contador = contador * Double.parseDouble(txtPantalla.getText());
-
-            memoria1 = contador.toString();
+//        if (!txtPantalla.getText().equals("")) {
+//            contador = 1.0;
+//            contador = contador * Double.parseDouble(txtPantalla.getText());
+//
+//            memoria1 = contador.toString();
+//            signo = "*";
+//            txtPantalla.setText("");
+//        } else {
+//            memoria1 = "0";
+//        }
+        
+        
+        
+        if (!signo.equals("") && igualPrecionado == false) {
+            
+              memoria2 = txtPantalla.getText();
+            operacion = calculadora(memoria1, memoria2, signo);
+            memoria1 = operacion;
             signo = "*";
+            cuenta = cuenta + " " + txtPantalla.getText() +" "+ signo;
+            txtOperacion.setText(cuenta);
             txtPantalla.setText("");
-        } else {
-            memoria1 = "0";
+            igualPrecionado = false;
+            
+        }else{
+            
+            igualPrecionado = false;
+            if (!txtPantalla.getText().equals("")) {
+                contador = Double.parseDouble(txtPantalla.getText());
+                memoria1 = txtPantalla.getText();
+                signo = "*";
+                cuenta = " " + cuenta + " " + txtPantalla.getText() + " " + signo;
+                txtOperacion.setText(cuenta);
+                txtPantalla.setText("");
+                restaAct = true;
+            }else{
+                memoria1="0";
+            }
+            
         }
     }//GEN-LAST:event_btnPorActionPerformed
 
@@ -563,48 +690,86 @@ public class Calculadora extends javax.swing.JFrame {
 //            memoria1 = "0";
 //        }
 
-        String division;
-
-        if (activo == false) {
+        if (!signo.equals("") && igualPrecionado == false) {
+            
+              memoria2 = txtPantalla.getText();
+            operacion = calculadora(memoria1, memoria2, signo);
+            memoria1 = operacion;
+            signo = "/";
+            cuenta = cuenta + " " + txtPantalla.getText() + " " + signo;
+            txtOperacion.setText(cuenta);
+            txtPantalla.setText("");
+            igualPrecionado = false;
+            
+        }else{
+            
+            igualPrecionado = false;
             if (!txtPantalla.getText().equals("")) {
                 contador = Double.parseDouble(txtPantalla.getText());
                 memoria1 = txtPantalla.getText();
                 signo = "/";
+                cuenta = cuenta + " " + txtPantalla.getText() + " " + signo;
+                txtOperacion.setText(cuenta);
                 txtPantalla.setText("");
-                activo = true;
-            } else {
-                memoria1 = "0";
+                restaAct = true;
+            }else{
+                memoria1="0";
             }
-
-        } else {
-
-            memoria2 = txtPantalla.getText();
-            division = calculadora(memoria1, memoria2, signo);
-            memoria1 = division;
-            signo = "/";
-            txtPantalla.setText("");
-
-//            if (!memoria2.equals("")) {
-//            resultado = calculadora(memoria1, memoria2, signo);
-//            txtPantalla.setText(resultado);
-//            contador = 0.0;
-//            igualPrecionado = true;
-////            memoria1 = "";
-////            memoria2 = "";
+            
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        String division;
+//
+//        if (activo == false) {
+//            if (!txtPantalla.getText().equals("")) {
+//                contador = Double.parseDouble(txtPantalla.getText());
+//                memoria1 = txtPantalla.getText();
+//                signo = "/";
+//                txtPantalla.setText("");
+//                activo = true;
+//            } else {
+//                memoria1 = "0";
+//            }
+//
+//        } else {
+//
+//            memoria2 = txtPantalla.getText();
+//            division = calculadora(memoria1, memoria2, signo);
+//            memoria1 = division;
+//            signo = "/";
+//            txtPantalla.setText("");
+//
+////            if (!memoria2.equals("")) {
+////            resultado = calculadora(memoria1, memoria2, signo);
+////            txtPantalla.setText(resultado);
+////            contador = 0.0;
+////            igualPrecionado = true;
+//////            memoria1 = "";
+//////            memoria2 = "";
+//        }
 
 
     }//GEN-LAST:event_btnDividirActionPerformed
 
     private void bntIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntIgualActionPerformed
         // TODO add your handling code here:
-        String resultado;
+//        String resultado;
 
         if (igualPrecionado == false) {
 
             memoria2 = txtPantalla.getText();
             txtOperacion.setText("");
             cuenta = "";
+            
 
             if (!memoria2.equals("")) {
                 resultado = calculadora(memoria1, memoria2, signo);
@@ -613,6 +778,9 @@ public class Calculadora extends javax.swing.JFrame {
                 igualPrecionado = true;
                 activo = false;
                 restaAct = false;
+                sumaAct = false;
+                
+                
 //            memoria1 = "";
 //            memoria2 = "";
             }
@@ -626,6 +794,7 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText(resultado);
             contador = 0.0;
             igualPrecionado = true;
+            
 
 //            memoria1 = "";
 //            memoria2 = "";
