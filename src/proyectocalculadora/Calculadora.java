@@ -5,6 +5,9 @@
  */
 package proyectocalculadora;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 /**
  *
  * @author JrCarlosAlberto
@@ -23,6 +26,7 @@ public class Calculadora extends javax.swing.JFrame {
     Boolean sumaAct = false;
     String cuenta = "";
     String resultado = "";
+    String memoria;
 
     /**
      * Creates new form Calculadora
@@ -30,6 +34,14 @@ public class Calculadora extends javax.swing.JFrame {
     public Calculadora() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        txtPantalla.requestFocus();
+        
+        
+        
+        
+//        Teclas key  = new Teclas();
+//        addKeyListener(key);
     }
 
     /**
@@ -63,6 +75,13 @@ public class Calculadora extends javax.swing.JFrame {
         btnInvertir = new javax.swing.JButton();
         bntIgual = new javax.swing.JButton();
         txtOperacion = new javax.swing.JTextField();
+        btn_BorrarDigito = new javax.swing.JButton();
+        btn_memClear = new javax.swing.JButton();
+        btn_memRecall = new javax.swing.JButton();
+        btn_memSave = new javax.swing.JButton();
+        btn_mMas = new javax.swing.JButton();
+        btn_mMenos = new javax.swing.JButton();
+        lbl_indicador = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadora");
@@ -222,46 +241,109 @@ public class Calculadora extends javax.swing.JFrame {
         txtOperacion.setBackground(new java.awt.Color(255, 255, 255));
         txtOperacion.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        btn_BorrarDigito.setText("Borrar");
+        btn_BorrarDigito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BorrarDigitoActionPerformed(evt);
+            }
+        });
+
+        btn_memClear.setText("MC");
+        btn_memClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_memClearActionPerformed(evt);
+            }
+        });
+
+        btn_memRecall.setText("MR");
+        btn_memRecall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_memRecallActionPerformed(evt);
+            }
+        });
+
+        btn_memSave.setText("MS");
+        btn_memSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_memSaveActionPerformed(evt);
+            }
+        });
+
+        btn_mMas.setText("M+");
+        btn_mMas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_mMasActionPerformed(evt);
+            }
+        });
+
+        btn_mMenos.setText("M-");
+        btn_mMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_mMenosActionPerformed(evt);
+            }
+        });
+
+        lbl_indicador.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_indicador.setText("M");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bnt1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bnt4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn0, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(bntMasMenos, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnPunto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnPor, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnMas, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnDividir, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnBorrarOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bntIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnBorrarPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnInvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtPantalla)
+                            .addComponent(txtOperacion))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bnt1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bnt4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn0, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(bntMasMenos, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPunto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPor, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnMas, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDividir, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBorrarOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bntIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBorrarPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnInvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtPantalla)
-                    .addComponent(txtOperacion))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lbl_indicador, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_BorrarDigito, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btn_memClear)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_memRecall)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_memSave)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_mMas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_mMenos)))))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bnt1, bnt4, bntIgual, bntMasMenos, btn0, btn2, btn3, btn5, btn6, btn7, btn8, btn9, btnBorrarOperacion, btnBorrarPantalla, btnDividir, btnInvertir, btnMas, btnMenos, btnPor, btnPunto});
@@ -274,6 +356,17 @@ public class Calculadora extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(txtPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_indicador)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(btn_BorrarDigito)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_memClear)
+                    .addComponent(btn_memRecall)
+                    .addComponent(btn_memSave)
+                    .addComponent(btn_mMas)
+                    .addComponent(btn_mMenos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bnt1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,7 +412,7 @@ public class Calculadora extends javax.swing.JFrame {
                                             .addComponent(btnInvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(btnBorrarPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGap(49, 49, 49))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bnt1, bnt4, bntIgual, bntMasMenos, btn0, btn2, btn3, btn5, btn6, btn7, btn8, btn9, btnBorrarOperacion, btnBorrarPantalla, btnDividir, btnInvertir, btnMas, btnMenos, btnPor, btnPunto});
@@ -446,17 +539,6 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void btnBorrarOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarOperacionActionPerformed
         // TODO add your handling code here:
-        String cadena;
-        cadena = txtPantalla.getText();
-
-        if (cadena.length() > 0) {
-            cadena = cadena.substring(0, cadena.length() - 1);
-            txtPantalla.setText(cadena);
-        }
-    }//GEN-LAST:event_btnBorrarOperacionActionPerformed
-
-    private void btnBorrarPantallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarPantallaActionPerformed
-        // TODO add your handling code here:
         txtPantalla.setText("");
         txtOperacion.setText("");
         cuenta = "";
@@ -465,6 +547,11 @@ public class Calculadora extends javax.swing.JFrame {
         memoria2 = "";
         signo = "";
         resultado = "";
+    }//GEN-LAST:event_btnBorrarOperacionActionPerformed
+
+    private void btnBorrarPantallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarPantallaActionPerformed
+        // TODO add your handling code here:
+        txtPantalla.setText("");
     }//GEN-LAST:event_btnBorrarPantallaActionPerformed
 
     private void btnInvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvertirActionPerformed
@@ -812,6 +899,59 @@ public class Calculadora extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bntIgualActionPerformed
 
+    private void btn_BorrarDigitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarDigitoActionPerformed
+        // TODO add your handling code here:
+        String cadena;
+        cadena = txtPantalla.getText();
+
+        if (cadena.length() > 0) {
+            cadena = cadena.substring(0, cadena.length() - 1);
+            txtPantalla.setText(cadena);
+        }
+    }//GEN-LAST:event_btn_BorrarDigitoActionPerformed
+
+    private void btn_memSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_memSaveActionPerformed
+        // TODO add your handling code here:
+        memoria = txtPantalla.getText();
+        txtPantalla.setText("");
+    }//GEN-LAST:event_btn_memSaveActionPerformed
+
+    private void btn_memRecallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_memRecallActionPerformed
+        // TODO add your handling code here:
+        txtPantalla.setText(memoria);
+    }//GEN-LAST:event_btn_memRecallActionPerformed
+
+    private void btn_memClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_memClearActionPerformed
+        // TODO add your handling code here:
+        memoria = "";
+        
+    }//GEN-LAST:event_btn_memClearActionPerformed
+
+    private void btn_mMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mMasActionPerformed
+        // TODO add your handling code here:
+        memoria1 = memoria;
+        memoria2 = txtPantalla.getText();
+        signo = "+";
+        memoria = calculadora(memoria1, memoria2, signo);
+        txtPantalla.setText("");
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btn_mMasActionPerformed
+
+    private void btn_mMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mMenosActionPerformed
+        // TODO add your handling code here:
+        memoria1 = memoria;
+        memoria2 = txtPantalla.getText();
+        signo = "-";
+        memoria = calculadora(memoria1, memoria2, signo);
+        txtPantalla.setText("");
+        
+    }//GEN-LAST:event_btn_mMenosActionPerformed
+
     public static String calculadora(String memoria1, String memoria2, String signo) {
         Double resultado = 0.0;
         String respuesta;
@@ -905,6 +1045,13 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JButton btnMenos;
     private javax.swing.JButton btnPor;
     private javax.swing.JButton btnPunto;
+    private javax.swing.JButton btn_BorrarDigito;
+    private javax.swing.JButton btn_mMas;
+    private javax.swing.JButton btn_mMenos;
+    private javax.swing.JButton btn_memClear;
+    private javax.swing.JButton btn_memRecall;
+    private javax.swing.JButton btn_memSave;
+    private javax.swing.JLabel lbl_indicador;
     private javax.swing.JTextField txtOperacion;
     private javax.swing.JTextField txtPantalla;
     // End of variables declaration//GEN-END:variables

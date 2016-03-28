@@ -25,49 +25,72 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="bnt1" linkSize="5" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="bnt4" linkSize="5" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="btn7" linkSize="5" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="btn0" linkSize="5" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="bntMasMenos" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn5" linkSize="5" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="btn2" linkSize="5" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="btn8" linkSize="5" min="-2" pref="46" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="btn6" linkSize="5" min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="btn9" linkSize="5" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="btnPunto" linkSize="5" min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="btn3" linkSize="5" min="-2" pref="49" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnMenos" linkSize="5" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Component id="btnPor" linkSize="5" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Component id="btnMas" linkSize="5" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Component id="btnDividir" linkSize="5" min="-2" pref="48" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnBorrarOperacion" linkSize="5" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                                  <Component id="bntIgual" linkSize="5" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                                  <Component id="btnBorrarPantalla" linkSize="5" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                                  <Component id="btnInvertir" linkSize="5" min="-2" pref="56" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="txtPantalla" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtOperacion" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="bnt1" linkSize="5" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="bnt4" linkSize="5" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="btn7" linkSize="5" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="btn0" linkSize="5" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="bntMasMenos" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn5" linkSize="5" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="btn2" linkSize="5" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="btn8" linkSize="5" min="-2" pref="46" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btn6" linkSize="5" min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="btn9" linkSize="5" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="btnPunto" linkSize="5" min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="btn3" linkSize="5" min="-2" pref="49" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnMenos" linkSize="5" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="btnPor" linkSize="5" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="btnMas" linkSize="5" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="btnDividir" linkSize="5" min="-2" pref="48" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnBorrarOperacion" linkSize="5" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="bntIgual" linkSize="5" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="btnBorrarPantalla" linkSize="5" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="btnInvertir" linkSize="5" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="lbl_indicador" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_BorrarDigito" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btn_memClear" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_memRecall" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_memSave" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_mMas" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_mMenos" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <Component id="txtPantalla" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtOperacion" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,6 +102,18 @@
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="txtPantalla" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="lbl_indicador" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="52" max="32767" attributes="0"/>
+              <Component id="btn_BorrarDigito" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btn_memClear" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_memRecall" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_memSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_mMas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_mMenos" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="bnt1" linkSize="6" min="-2" pref="32" max="-2" attributes="0"/>
@@ -96,7 +131,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="btn8" linkSize="6" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="btn3" linkSize="6" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -136,7 +171,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -324,6 +359,62 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_BorrarDigito">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Borrar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_BorrarDigitoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_memClear">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MC"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_memClearActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_memRecall">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MR"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_memRecallActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_memSave">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MS"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_memSaveActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_mMas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M+"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_mMasActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_mMenos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M-"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_mMenosActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_indicador">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="M"/>
       </Properties>
     </Component>
   </SubComponents>
