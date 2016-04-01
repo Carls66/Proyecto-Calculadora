@@ -5,6 +5,8 @@
  */
 package proyectocalculadora;
 
+import java.awt.Color;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -12,7 +14,7 @@ import java.awt.event.KeyListener;
  *
  * @author JrCarlosAlberto
  */
-public class Calculadora extends javax.swing.JFrame {
+public class Calculadora extends javax.swing.JFrame implements KeyListener{
 
     String memoria1;
     String signo = "";
@@ -24,9 +26,13 @@ public class Calculadora extends javax.swing.JFrame {
     Boolean activo = false;
     Boolean restaAct = false;
     Boolean sumaAct = false;
+    Boolean modAct = false;
     String cuenta = "";
     String resultado = "";
-    String memoria;
+    String memoria = "0";
+    int mod1;
+    int mod2;
+    Boolean puntoActivo = false;
 
     /**
      * Creates new form Calculadora
@@ -36,6 +42,7 @@ public class Calculadora extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         txtPantalla.requestFocus();
+
         
         
         
@@ -82,6 +89,8 @@ public class Calculadora extends javax.swing.JFrame {
         btn_mMas = new javax.swing.JButton();
         btn_mMenos = new javax.swing.JButton();
         lbl_indicador = new javax.swing.JLabel();
+        btn_mod = new javax.swing.JButton();
+        btn_igual2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadora");
@@ -91,9 +100,15 @@ public class Calculadora extends javax.swing.JFrame {
         txtPantalla.setBackground(new java.awt.Color(255, 255, 255));
         txtPantalla.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         txtPantalla.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPantalla.setText("0");
         txtPantalla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPantallaActionPerformed(evt);
+            }
+        });
+        txtPantalla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPantallaKeyPressed(evt);
             }
         });
 
@@ -241,7 +256,7 @@ public class Calculadora extends javax.swing.JFrame {
         txtOperacion.setBackground(new java.awt.Color(255, 255, 255));
         txtOperacion.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        btn_BorrarDigito.setText("Borrar");
+        btn_BorrarDigito.setText("<=");
         btn_BorrarDigito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_BorrarDigitoActionPerformed(evt);
@@ -285,6 +300,20 @@ public class Calculadora extends javax.swing.JFrame {
 
         lbl_indicador.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_indicador.setText("M");
+
+        btn_mod.setText("MOD");
+        btn_mod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_modActionPerformed(evt);
+            }
+        });
+
+        btn_igual2.setText("igual");
+        btn_igual2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_igual2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -332,17 +361,24 @@ public class Calculadora extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_indicador, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_BorrarDigito, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btn_memClear)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btn_mod)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_igual2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btn_memClear)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_memRecall)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_memSave)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_mMas)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_memRecall)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_memSave)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_mMas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_mMenos)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_mMenos, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btn_BorrarDigito, javax.swing.GroupLayout.Alignment.TRAILING))))))
                 .addContainerGap())
         );
 
@@ -357,8 +393,11 @@ public class Calculadora extends javax.swing.JFrame {
                 .addComponent(txtPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_indicador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(btn_BorrarDigito)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_BorrarDigito)
+                    .addComponent(btn_igual2)
+                    .addComponent(btn_mod))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_memClear)
@@ -435,7 +474,14 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "1");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "1");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "1");
+        }
+        
 
     }//GEN-LAST:event_bnt1ActionPerformed
 
@@ -445,7 +491,13 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "2");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "2");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "2");
+        }
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
@@ -454,7 +506,13 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "3");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "3");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "3");
+        }
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void bnt4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt4ActionPerformed
@@ -463,7 +521,13 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "4");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "4");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "4");
+        }
     }//GEN-LAST:event_bnt4ActionPerformed
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
@@ -472,7 +536,13 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "5");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "5");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "5");
+        }
     }//GEN-LAST:event_btn5ActionPerformed
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
@@ -481,7 +551,13 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "6");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "6");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "6");
+        }
     }//GEN-LAST:event_btn6ActionPerformed
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
@@ -490,7 +566,13 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "7");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "7");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "7");
+        }
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
@@ -499,7 +581,13 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "8");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "8");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "8");
+        }
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
@@ -508,7 +596,13 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "9");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "9");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "9");
+        }
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
@@ -517,12 +611,19 @@ public class Calculadora extends javax.swing.JFrame {
             txtPantalla.setText("");
             resultado = "";
         }
-        txtPantalla.setText(txtPantalla.getText() + "0");
+        if (txtPantalla.getText().equals("0")) {
+            
+            txtPantalla.setText("");
+            txtPantalla.setText(txtPantalla.getText() + "0");
+        }else{
+            txtPantalla.setText(txtPantalla.getText() + "0");
+        }
     }//GEN-LAST:event_btn0ActionPerformed
 
     private void btnPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuntoActionPerformed
         // TODO add your handling code here:
         //variable cadena para almacenar el texto de la pantalla de la calculadora
+        puntoActivo = true;
         String cadena;
         cadena = txtPantalla.getText();
         //comparacion para saber si la cadena esta vacia
@@ -539,7 +640,7 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void btnBorrarOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarOperacionActionPerformed
         // TODO add your handling code here:
-        txtPantalla.setText("");
+        txtPantalla.setText("0");
         txtOperacion.setText("");
         cuenta = "";
         contador = 0.0;
@@ -547,11 +648,12 @@ public class Calculadora extends javax.swing.JFrame {
         memoria2 = "";
         signo = "";
         resultado = "";
+        puntoActivo = false;
     }//GEN-LAST:event_btnBorrarOperacionActionPerformed
 
     private void btnBorrarPantallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarPantallaActionPerformed
         // TODO add your handling code here:
-        txtPantalla.setText("");
+        txtPantalla.setText("0");
     }//GEN-LAST:event_btnBorrarPantallaActionPerformed
 
     private void btnInvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvertirActionPerformed
@@ -663,11 +765,21 @@ public class Calculadora extends javax.swing.JFrame {
         
         if (!signo.equals("") && igualPrecionado == false) {
             
-              memoria2 = txtPantalla.getText();
+//              memoria2 = txtPantalla.getText();
+              
+              if (!txtPantalla.getText().equals("")) {
+                
+                memoria2 = txtPantalla.getText();
+               
+            }else{
+                memoria2="0";
+            }
+              
+              
             operacion = calculadora(memoria1, memoria2, signo);
             memoria1 = operacion;
             signo = "+";
-            cuenta = cuenta + " " + txtPantalla.getText() +" "+ signo;
+            cuenta = cuenta + " " + memoria1 +" "+ signo;
             txtOperacion.setText(cuenta);
             txtPantalla.setText("");
             igualPrecionado = false;
@@ -678,14 +790,16 @@ public class Calculadora extends javax.swing.JFrame {
             if (!txtPantalla.getText().equals("")) {
                 contador = Double.parseDouble(txtPantalla.getText());
                 memoria1 = txtPantalla.getText();
-                signo = "+";
-                cuenta = " " + cuenta + " " + txtPantalla.getText() + " " + signo;
-                txtOperacion.setText(cuenta);
-                txtPantalla.setText("");
-                restaAct = true;
+               
             }else{
                 memoria1="0";
             }
+             signo = "+";
+//                cuenta = " " + cuenta + " " + txtPantalla.getText() + " " + signo;
+             cuenta = " " + cuenta + " " + memoria1 + " " + signo;
+                txtOperacion.setText(cuenta);
+                txtPantalla.setText("");
+                restaAct = true;
             
         }
         
@@ -850,13 +964,37 @@ public class Calculadora extends javax.swing.JFrame {
     private void bntIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntIgualActionPerformed
         // TODO add your handling code here:
 //        String resultado;
-
+int modOp;
+String modRes;
+        
         if (igualPrecionado == false) {
 
+            
+            
+            
+        
+        
+        if (modAct == true) {
+            mod2 = Integer.parseInt(txtPantalla.getText());
+        modOp = mod1 % mod2;
+        modRes = Integer.toString(modOp);
+        txtPantalla.setText(modRes);
+        modAct = false;
+        }else{
+            
+        
+            
+            
+            
+            
+            
+            
             memoria2 = txtPantalla.getText();
             txtOperacion.setText("");
             cuenta = "";
             
+            
+          
 
             if (!memoria2.equals("")) {
                 resultado = calculadora(memoria1, memoria2, signo);
@@ -871,6 +1009,10 @@ public class Calculadora extends javax.swing.JFrame {
 //            memoria1 = "";
 //            memoria2 = "";
             }
+            
+            }
+            
+            
         } else {
 
             memoria1 = txtPantalla.getText();
@@ -880,7 +1022,11 @@ public class Calculadora extends javax.swing.JFrame {
 //            resultado = operacion.toString();
             txtPantalla.setText(resultado);
             contador = 0.0;
-            igualPrecionado = true;
+            
+            
+                igualPrecionado = true;
+            
+            
             
 
 //            memoria1 = "";
@@ -912,8 +1058,19 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void btn_memSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_memSaveActionPerformed
         // TODO add your handling code here:
-        memoria = txtPantalla.getText();
+        
+        
+        if (txtPantalla.getText().equals("")) {
+            memoria = "0";
+        }else{
+            
+            memoria = txtPantalla.getText();
+        }
+        
+        
+        
         txtPantalla.setText("");
+        lbl_indicador.setForeground(Color.GREEN);
     }//GEN-LAST:event_btn_memSaveActionPerformed
 
     private void btn_memRecallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_memRecallActionPerformed
@@ -923,14 +1080,21 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void btn_memClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_memClearActionPerformed
         // TODO add your handling code here:
-        memoria = "";
+        memoria = "0";
+        lbl_indicador.setForeground(Color.black);
         
     }//GEN-LAST:event_btn_memClearActionPerformed
 
     private void btn_mMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mMasActionPerformed
         // TODO add your handling code here:
         memoria1 = memoria;
-        memoria2 = txtPantalla.getText();
+        if (txtPantalla.getText().equals("")) {
+            memoria2 = "0";
+        }else{
+            
+            memoria2 = txtPantalla.getText();
+        }
+        
         signo = "+";
         memoria = calculadora(memoria1, memoria2, signo);
         txtPantalla.setText("");
@@ -950,7 +1114,60 @@ public class Calculadora extends javax.swing.JFrame {
         memoria = calculadora(memoria1, memoria2, signo);
         txtPantalla.setText("");
         
+        
     }//GEN-LAST:event_btn_mMenosActionPerformed
+
+    private void btn_modActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modActionPerformed
+        // TODO add your handling code here:
+       
+//       int mod1,mod2;
+//       
+//       
+//       mod1 = 63;
+//       mod2 = 8;
+//       
+//       int respuesta =  (mod1 % mod2);
+//        
+//        txtPantalla.setText(Integer.toString(respuesta));
+        
+      
+        
+        
+            mod1 = Integer.parseInt(txtPantalla.getText());
+            txtOperacion.setText(Integer.toString(mod1)+" MOD ");
+            modAct = true;
+            txtPantalla.setText("");
+            igualPrecionado = false;
+            
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btn_modActionPerformed
+
+    private void btn_igual2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_igual2ActionPerformed
+        // TODO add your handling code here:
+        
+        int modOp;
+String modRes;
+        
+        
+        if (modAct == true) {
+            mod2 = Integer.parseInt(txtPantalla.getText());
+        modOp = mod1 % mod2;
+        modRes = Integer.toString(modOp);
+        txtPantalla.setText(modRes);
+        }
+    }//GEN-LAST:event_btn_igual2ActionPerformed
+
+    private void txtPantallaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPantallaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btn2.doClick();
+        }
+       
+    }//GEN-LAST:event_txtPantallaKeyPressed
 
     public static String calculadora(String memoria1, String memoria2, String signo) {
         Double resultado = 0.0;
@@ -973,6 +1190,8 @@ public class Calculadora extends javax.swing.JFrame {
         return respuesta;
 
     }
+    
+    
 
     public static boolean existePunto(String cadena) {
         boolean resultado;
@@ -1046,13 +1265,30 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JButton btnPor;
     private javax.swing.JButton btnPunto;
     private javax.swing.JButton btn_BorrarDigito;
+    private javax.swing.JButton btn_igual2;
     private javax.swing.JButton btn_mMas;
     private javax.swing.JButton btn_mMenos;
     private javax.swing.JButton btn_memClear;
     private javax.swing.JButton btn_memRecall;
     private javax.swing.JButton btn_memSave;
+    private javax.swing.JButton btn_mod;
     private javax.swing.JLabel lbl_indicador;
     private javax.swing.JTextField txtOperacion;
     private javax.swing.JTextField txtPantalla;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent evt) {
+       
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
