@@ -5,6 +5,8 @@
  */
 package proyectocalculadora;
 
+
+
 /**
  *
  * @author JrCarlosAlberto
@@ -20,6 +22,9 @@ public class ProyectoCalculadora {
         Calculadora instancia = new Calculadora();
         
         instancia.setVisible(true);
+        
+     
+        
     }
     
 }
